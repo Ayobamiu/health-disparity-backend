@@ -14,6 +14,7 @@ const {
   getHealthInsights,
   getResourcesRecommendations,
 } = require("./bot/function");
+const { default: axios } = require("axios");
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -91,6 +92,27 @@ app.post("/getResourcesRecommendations", async (req, res) => {
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: "Error getting resource recommendations" });
+  }
+});
+
+app.post("/searchForHeathCareProviders", async (req, res) => {
+  const { search_city, search_state, search_postalCode, search_taxonomy } =
+    req.body;
+  try {
+    const response = await axios.request({
+      url: "https://npiregistry.cms.hhs.gov/api/",
+      method: "get",
+      params: {
+        city: search_city,
+        state: search_state,
+        postal_code: search_postalCode,
+        taxonomy_description: search_taxonomy,
+        version: "2.1",
+      },
+    });
+    res.status(200).json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error getting providers" });
   }
 });
 
