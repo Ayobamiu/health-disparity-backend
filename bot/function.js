@@ -44,7 +44,16 @@ async function getHealthInsights(data) {
   // Ensure that the user's data is valid
   const userDataSchema = z.object({
     age: z.string(),
-    gender: z.enum(["male", "female", "other"]),
+    gender: z.enum([
+      "Man",
+      "Woman",
+      "Transgender Man",
+      "Transgender Woman",
+      "Non-Binary",
+      "No Gender",
+      "Other",
+      "Prefer not to state",
+    ]),
     city: z.string(),
     state: z.string(),
     ethnicity: z.string(),
