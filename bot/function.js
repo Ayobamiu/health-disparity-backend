@@ -52,7 +52,7 @@ async function getHealthInsights(data) {
       "Non-Binary",
       "No Gender",
       "Other",
-      "Prefer not to state",
+      "",
     ]),
     city: z.string(),
     state: z.string(),
