@@ -108,35 +108,16 @@ const recommendationsAndTrendsResponseFormat = {
           type: "object",
           properties: {
             past6Months: {
-              type: "object",
-              properties: {
-                January: {
+              type: "object", // Use dynamic keys for months
+              patternProperties: {
+                "^[A-Za-z]+$": {
                   type: "number",
-                },
-                February: {
-                  type: "number",
-                },
-                March: {
-                  type: "number",
-                },
-                April: {
-                  type: "number",
-                },
-                May: {
-                  type: "number",
-                },
-                June: {
-                  type: "number",
+                  description:
+                    "Month name as the key and the trend value (1-5) as the value.",
                 },
               },
-              required: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-              ],
+              description:
+                "Dynamic month names as keys and trend values (1-5) as values.",
             },
             averageTrend: {
               type: "string",
